@@ -19,7 +19,7 @@ fn get_opcode(instr: &str) -> u16 {
         "SLL"   => 0x7,
         "SRL"   => 0x8,
         "ADDI"  => 0x9,
-        "SUBI"  => 0xA,
+        "ANDI"  => 0xA,
         "LOAD"  => 0xB,
         "STORE" => 0xC,
         "JALR"  => 0xD,
@@ -71,15 +71,18 @@ fn main() {
     let code = [
         "ADDI 10 B1",
         "ADD B1 B2 B2",
-        "SUBI 1 B1",
+        "ADDI -1 B1",
         "BLT B1 ZR -4",
+        "STORE B2 ZR 100",
+        "LOAD 100 ZR G8",
         "JALR 0 ZR G11"
     ];
 
     let mut binary: u16;
 
     for instr in code {
-        let parsed_instr: Vec<&str> = instr.split(' ').collect();
+        let _parsed_instr = instr.replace(",", " ");
+        let parsed_instr: Vec<&str> = _parsed_instr.split(' ').collect();
 
         let opcode = get_opcode(parsed_instr[0]);
         let instr_type = get_instr_type(opcode);
