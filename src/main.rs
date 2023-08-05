@@ -73,8 +73,6 @@ fn main() {
         "ADD B1 B2 B2",
         "ADDI -1 B1",
         "BLT B1 ZR -4",
-        "STORE B2 ZR 100",
-        "LOAD 100 ZR G8",
         "JRL 0 ZR G11"
     ];
 
