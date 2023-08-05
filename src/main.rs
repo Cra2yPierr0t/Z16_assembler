@@ -19,10 +19,10 @@ fn get_opcode(instr: &str) -> u16 {
         "SLL"   => 0x7,
         "SRL"   => 0x8,
         "ADDI"  => 0x9,
-        "ANDI"  => 0xA,
-        "LOAD"  => 0xB,
-        "STORE" => 0xC,
-        "JALR"  => 0xD,
+        "LOAD"  => 0xA,
+        "STORE" => 0xB,
+        "JAL"   => 0xC,
+        "JRL"   => 0xD,
         "BEQ"   => 0xE,
         "BLT"   => 0xF,
         _       => panic!("[ERROR] UNKNOWN OPCODE"),
@@ -32,10 +32,10 @@ fn get_opcode(instr: &str) -> u16 {
 fn get_instr_type(opcode: u16) -> InstrType {
     match opcode {
         0x0..=0x8   => InstrType::RType,
-        0x9..=0xA   => InstrType::IType,
-        0xB         => InstrType::LType,
-        0xC         => InstrType::SType,
-        0xD         => InstrType::JType,
+        0x9         => InstrType::IType,
+        0xA         => InstrType::LType,
+        0xB         => InstrType::SType,
+        0xC..=0xD   => InstrType::JType,
         0xE..=0xF   => InstrType::BType,
         _           => panic!("[ERROR] UNKNOWN INSTR TYPE"),
     }
@@ -75,7 +75,7 @@ fn main() {
         "BLT B1 ZR -4",
         "STORE B2 ZR 100",
         "LOAD 100 ZR G8",
-        "JALR 0 ZR G11"
+        "JRL 0 ZR G11"
     ];
 
     let mut binary: u16;
